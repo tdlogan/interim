@@ -19,9 +19,9 @@ angular.module('interim.chat', ["firebase", "luegg.directives"])
   $scope.sendMessage = function() {
     var msg = ref.child($scope.roomId).push();
       var message = {
-        userId: $rootScope.user.id,
-        userProfileImage: $rootScope.userInfo.avatar_url,
-        name: $rootScope.user.displayName,
+        userId: $rootScope.userInfo.id,
+        userProfileImage: $rootScope.userInfo.avi_url,
+        name: $rootScope.userInfo.name,
         timestamp: Firebase.ServerValue.TIMESTAMP,
         message: $scope.msg,
         type: 'default'
@@ -36,10 +36,7 @@ angular.module('interim.chat', ["firebase", "luegg.directives"])
   $scope.personalInfo = function(user) {
     bootbox.dialog({
       //message provides us with most of the major details in the user profile.
-      message:  "<img id='modalProfilePic' src='" + user.userProfileImage + "'/>"+ "<br>" +
-                "<h3>" + user.userId.username + "</h3>" + "<br>" +
-                "Location: " + user.userId.cachedUserProfile.location + "<br>" +
-                "<a target='new' href='" + user.userId.cachedUserProfile.html_url + "'>Github Profile</a>", 
+      message:  "<img id='modalProfilePic' src='" + user.userProfileImage + "'/>"+ "<br>",
       title: user.name + "'s Profile",
       closeButton: true,
       onEscape: true
